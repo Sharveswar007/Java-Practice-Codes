@@ -1,5 +1,5 @@
 // Define the class named agep1
-public class agep1 {
+public class hi {
     public static void main(String[] args) {
         
         // Initialize integer variable 'a' with the value 2000 (birth year)
