@@ -1,4 +1,4 @@
-# Java Practice Codes  
+# Java Practice Codes 
 
 ## 📚 About This Repository  
 - This repository helps me track my learning progress as a Computer Science student.  
