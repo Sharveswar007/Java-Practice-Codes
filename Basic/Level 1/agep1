@@ -1,0 +1,4 @@
+public class agep1{
+public static void main(String[],args){
+int a=2000,b=2024;
+system.out.println("Age diff is: "+b-a)}}
