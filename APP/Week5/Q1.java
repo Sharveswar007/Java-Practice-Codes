@@ -1,44 +1,53 @@
 public class Q1 {
-    public static void main (String [] args){
-        class BankAccount {
-            int account_number;
-            String account_name;
-            int account_balance;
-            void deposit(int amount) {
-                account_balance += amount;
-            }
-            void withdraw(int amount) {
-                account_balance -= amount;
-            }
-            void transfer(int amount, BankAccount fromAccount, BankAccount toAccount) {
-                fromAccount.withdraw(amount);
-                toAccount.deposit(amount);
+    static class BankAccount{
+        private
+        String accNo, accHolderName;
+        double balance;
+
+        public
+        BankAccount(String acc, String name, double bal){ 
+            this.accNo = acc;
+            this.accHolderName = name;
+            this.balance = bal;
+        }
+        void deposit(double amount){
+            if (amount > 0){
+                balance += amount;
             }
         }
-        BankAccount[] acc1 = new BankAccount[3];
-        for (int i = 0; i < 3; i++) {
-            acc1[i] = new BankAccount();
+        void withdraw(double amount){
+            if (amount > 0 && amount <= balance){
+                balance -= amount;
+            }
         }
-        acc1[0].account_number = 101;
-        acc1[0].account_name = "Alice";
-        acc1[0].account_balance = 1000;
-
-        acc1[1].account_number = 102;
-        acc1[1].account_name = "Bob";
-        acc1[1].account_balance = 2000;
-
-        acc1[2].account_number = 103;
-        acc1[2].account_name = "Charlie";
-        acc1[2].account_balance = 3000;
-
-        acc1[0].deposit(500);
-        acc1[1].withdraw(300);
-        acc1[0].transfer(200, acc1[0], acc1[1]);
-        for (int i = 0; i < 3; i++) {
-            System.out.println("Account Number: " + acc1[i].account_number);
-            System.out.println("Account Name: " + acc1[i].account_name);
-            System.out.println("Account Balance: " + acc1[i].account_balance);
-            System.out.println();
+        void transfer(BankAccount targetAccount, double amount){
+            if (amount > 0 && amount <= balance){
+                balance -= amount;
+                targetAccount.deposit(amount);
+            }
         }
     }
-}
+    public static void main(String[] args) {
+        BankAccount[] accounts = new BankAccount[2];
+
+        // Create accounts
+        accounts[0] = new BankAccount("123456", "Alice", 1000);
+        accounts[0].deposit(1000);
+        accounts[0].withdraw(500);
+
+        accounts[1] = new BankAccount("123ab","John",0);
+
+        // Example of transferring money with validation
+        if (accounts[0].balance >= 200) {
+            accounts[0].transfer(accounts[1], 200);
+            System.out.println("Transfer successful");
+        } else {
+            System.out.println("Insufficient funds for transfer");
+        }
+
+        // Display account balances
+        for (int i = 0; i < accounts.length; i++) {
+            System.out.println("Account " + i + " balance: " + accounts[i].balance);
+        }
+        }
+    }
